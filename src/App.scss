@@ -1,0 +1,35 @@
+.App {
+  height: 100vh;
+
+  .main-container {
+    width: 600px;
+    .heading {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .main-panel {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      .currency-panel {
+        select,
+        input {
+          width: 100%;
+          box-sizing: border-box;
+          margin-bottom: 0.5rem;
+        }
+        :last-child {
+          margin-bottom: unset;
+        }
+        input {
+          height: 30px;
+        }
+      }
+      .exchange-icon {
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+}
