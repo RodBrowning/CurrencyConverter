@@ -1,33 +1,22 @@
+import React from 'react';
 import './App.scss';
 import { BsCurrencyExchange } from 'react-icons/bs';
+import CurrencyData from './Components/CurrencyData';
+import Heading from './Components/Heading';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <div className="main-container">
-        <div className="heading">
-          <h1>Consersor de valores</h1>
-          <h6>Dolar: R$5,00</h6>
-        </div>
+        <Heading />
         <div className="main-panel">
-          <div className="currency-panel">
-            <select name="" id="">
-              <option value="tes">tes</option>
-              <option value="tes">tes2</option>
-            </select>
-            <input type="text" />
-          </div>
+          <CurrencyData />
           <BsCurrencyExchange className="exchange-icon" />
-          <div className="currency-panel">
-            <select name="" id="">
-              <option value="tes">tes</option>
-            </select>
-            <input type="text" />
-          </div>
+          <CurrencyData />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
