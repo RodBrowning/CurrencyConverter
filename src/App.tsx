@@ -13,6 +13,10 @@ interface ICurrenciesInfo {
   latest: ILatest | {};
 }
 
+type TargetAmount = number;
+type OriginAmount = number;
+type DolarValue = number;
+
 const App: React.FC = () => {
   const firstRender = useRef<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,6 +62,16 @@ const App: React.FC = () => {
     // console.log(currenciesInfo);
     firstRender.current = false;
   }, []);
+
+  const convertAmount = (
+    amount: OriginAmount,
+    currencyVal: DolarValue,
+    targetCurrencyVal: DolarValue
+  ): TargetAmount => {
+    const dolarAmount = amount / currencyVal;
+    const targetCurrencyAmount = dolarAmount * targetCurrencyVal;
+    return parseFloat(targetCurrencyAmount.toFixed(2));
+  };
 
   return (
     <div className="App">
