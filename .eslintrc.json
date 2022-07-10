@@ -35,6 +35,19 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
         "allowSeparatedGroups": false
       }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "parent",
+          ["external", "sibling"],
+          "internal",
+          "builtin",
+          "object",
+          "type"
+        ]
+      }
     ]
   }
 }
