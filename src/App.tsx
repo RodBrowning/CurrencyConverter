@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.scss';
 import { BsCurrencyExchange } from 'react-icons/bs';
 import CurrencyData from './Components/CurrencyData';
@@ -12,16 +12,18 @@ interface ICurrenciesInfo {
 }
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const firstRender = useRef<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [currenciesInfo, setCurrenciesInfo] = useState<ICurrenciesInfo>({
     symbols: {},
     latest: {},
   });
 
   useEffect(() => {
+    if (!firstRender.current) return;
     setLoading(true);
+
     const fetchCurrenciesSymbols = async () => {
-      setLoading(true);
       try {
         const response = await fetch('http://localhost:3004/symbols');
         if (!response.ok) throw new Error("Can't connect to API");
@@ -30,13 +32,10 @@ const App: React.FC = () => {
         setCurrenciesInfo(currenciesInfo);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log(e);
-      } finally {
-        setLoading(false);
+        console.error('error: ', e);
       }
     };
     const fetchCurrenciesLatest = async () => {
-      setLoading(true);
       try {
         const response = await fetch('http://localhost:3004/latest');
         if (!response.ok) throw new Error("Can't connect to API");
@@ -45,13 +44,17 @@ const App: React.FC = () => {
         setCurrenciesInfo(currenciesInfo);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error('error: ', e);
       } finally {
         setLoading(false);
       }
     };
+
     fetchCurrenciesSymbols();
     fetchCurrenciesLatest();
+
+    console.log(currenciesInfo);
+    firstRender.current = false;
   }, []);
 
   return (
@@ -59,6 +62,7 @@ const App: React.FC = () => {
       <div className="main-container">
         <Heading />
         <div className="main-panel">
+          {loading ? 'loading' : ''}
           <CurrencyData />
           <BsCurrencyExchange className="exchange-icon" />
           <CurrencyData />
