@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
 import './App.scss';
+
+import React, { useEffect, useRef, useState } from 'react';
+
 import { BsCurrencyExchange } from 'react-icons/bs';
 import CurrencyData from './Components/CurrencyData';
 import Heading from './Components/Heading';
-import { ISymbols } from './Types/Symbols';
 import { ILatest } from './Types/Latest';
+import { ISymbols } from './Types/Symbols';
 
 interface ICurrenciesInfo {
   symbols: ISymbols | {};
@@ -53,7 +55,7 @@ const App: React.FC = () => {
     fetchCurrenciesSymbols();
     fetchCurrenciesLatest();
 
-    console.log(currenciesInfo);
+    // console.log(currenciesInfo);
     firstRender.current = false;
   }, []);
 
