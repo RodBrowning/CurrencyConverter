@@ -1,6 +1,8 @@
 export interface ISymbols {
-  success: boolean;
-  symbols: {
-    [currencyAbbreviation: string]: string;
-  };
+  success?: boolean | undefined;
+  symbols?:
+    | {
+        [currencyAbbreviation: string]: string;
+      }
+    | undefined;
 }

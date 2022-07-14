@@ -1,9 +1,11 @@
 export interface ILatest {
-  success: boolean;
-  timestamp: number;
-  base: string;
-  date: string;
-  rates: {
-    [currencyValue: string]: number;
-  };
+  success?: boolean | undefined;
+  timestamp?: number | undefined;
+  base?: string | undefined;
+  date?: string | undefined;
+  rates?:
+    | {
+        [currencySymbol: string]: number;
+      }
+    | undefined;
 }

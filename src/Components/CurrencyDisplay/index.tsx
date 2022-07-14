@@ -16,7 +16,7 @@ interface Props {
   inicialCurrencySymbol: string;
 }
 
-const CurrencyData: React.FC<Props> = ({
+const CurrencyDisplay: React.FC<Props> = ({
   dolarAmount,
   setDolarAmountHandler,
   currenciesInfo,
@@ -123,4 +123,4 @@ const CurrencyData: React.FC<Props> = ({
   );
 };
 
-export default CurrencyData;
+export default CurrencyDisplay;

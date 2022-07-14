@@ -3,26 +3,24 @@ import './App.scss';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { BsCurrencyExchange } from 'react-icons/bs';
-import CurrencyData from './Components/CurrencyData';
+import CurrencyDisplay from './Components/CurrencyDisplay';
 import Heading from './Components/Heading';
 import { ILatest } from './Types/Latest';
 import { ISymbols } from './Types/Symbols';
 
-interface ICurrenciesInfo {
-  symbols: ISymbols | {};
-  latest: ILatest | {};
+export interface ICurrenciesInfo {
+  symbols: ISymbols;
+  latest: ILatest;
 }
-
-type TargetAmount = number;
-type OriginAmount = number;
-type DolarValue = number;
 
 const App: React.FC = () => {
   const firstRender = useRef<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [dolarAmount, setDolarAmount] = useState<string>('1.00');
   const [currenciesInfo, setCurrenciesInfo] = useState<ICurrenciesInfo>({
-    symbols: {},
-    latest: {},
+    symbols: { success: false },
+    latest: { success: false },
   });
 
   useEffect(() => {
@@ -37,6 +35,7 @@ const App: React.FC = () => {
         currenciesInfo.symbols = data;
         setCurrenciesInfo(currenciesInfo);
       } catch (e) {
+        setError(true);
         // eslint-disable-next-line no-console
         console.error('error: ', e);
       }
@@ -49,39 +48,45 @@ const App: React.FC = () => {
         currenciesInfo.latest = data;
         setCurrenciesInfo(currenciesInfo);
       } catch (e) {
+        setError(true);
         // eslint-disable-next-line no-console
         console.error('error: ', e);
       } finally {
         setLoading(false);
       }
     };
-
     fetchCurrenciesSymbols();
     fetchCurrenciesLatest();
 
-    // console.log(currenciesInfo);
     firstRender.current = false;
   }, []);
-
-  const convertAmount = (
-    amount: OriginAmount,
-    currencyVal: DolarValue,
-    targetCurrencyVal: DolarValue
-  ): TargetAmount => {
-    const dolarAmount = amount / currencyVal;
-    const targetCurrencyAmount = dolarAmount * targetCurrencyVal;
-    return parseFloat(targetCurrencyAmount.toFixed(2));
-  };
 
   return (
     <div className="App">
       <div className="main-container">
         <Heading />
         <div className="main-panel">
-          {loading ? 'loading' : ''}
-          <CurrencyData />
-          <BsCurrencyExchange className="exchange-icon" />
-          <CurrencyData />
+          {loading ? 'Loading...' : ''}
+          {error ? 'Some error ocurred. Open browser console for more details.' : ''}
+          {currenciesInfo.symbols.success && currenciesInfo.latest.success ? (
+            <>
+              <CurrencyDisplay
+                dolarAmount={dolarAmount}
+                setDolarAmountHandler={setDolarAmount}
+                currenciesInfo={currenciesInfo}
+                inicialCurrencySymbol="USD"
+              />
+              <BsCurrencyExchange className="exchange-icon" />
+              <CurrencyDisplay
+                dolarAmount={dolarAmount}
+                setDolarAmountHandler={setDolarAmount}
+                currenciesInfo={currenciesInfo}
+                inicialCurrencySymbol="EUR"
+              />
+            </>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>
