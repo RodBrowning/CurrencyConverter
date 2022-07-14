@@ -22,10 +22,9 @@
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "arrow-body-style": ["error", "always"],
-    "react/function-component-definition": [
-      2,
-      { "namedComponents": "arrow-function" }
-    ],
+    "no-multiple-empty-lines": "error",
+    "no-trailing-spaces": "error",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "sort-imports": [
       "error",
       {
@@ -39,14 +38,7 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "parent",
-          ["external", "sibling"],
-          "internal",
-          "builtin",
-          "object",
-          "type"
-        ]
+        "groups": [["external", "sibling"], ["parent", "internal", "builtin"], "object", "type"]
       }
     ]
   }
