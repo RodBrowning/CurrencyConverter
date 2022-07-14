@@ -25,39 +25,31 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!firstRender.current) return;
-    setLoading(true);
 
-    const fetchCurrenciesSymbols = async () => {
-      try {
-        const response = await fetch('http://localhost:3004/symbols');
-        if (!response.ok) throw new Error("Can't connect to API");
-        const data = await response.json();
-        currenciesInfo.symbols = data;
-        setCurrenciesInfo(currenciesInfo);
-      } catch (e) {
-        setError(true);
-        // eslint-disable-next-line no-console
-        console.error('error: ', e);
-      }
+    const fetchCurrencies = async (path: 'symbols' | 'latest') => {
+      const response = await fetch(`http://localhost:3004/${path}`);
+      const data = await response.json();
+      currenciesInfo[path] = data;
+      setCurrenciesInfo(currenciesInfo);
     };
-    const fetchCurrenciesLatest = async () => {
+
+    const fetchCurrenciesAPI = async () => {
+      setLoading(true);
       try {
-        const response = await fetch('http://localhost:3004/latest');
-        if (!response.ok) throw new Error("Can't connect to API");
-        const data = await response.json();
-        currenciesInfo.latest = data;
-        setCurrenciesInfo(currenciesInfo);
+        await fetchCurrencies('symbols');
+        await fetchCurrencies('latest');
       } catch (e) {
         setError(true);
         // eslint-disable-next-line no-console
-        console.error('error: ', e);
+        console.error(e);
+        // eslint-disable-next-line no-console
+        console.error("Can't connect to API");
       } finally {
         setLoading(false);
       }
     };
-    fetchCurrenciesSymbols();
-    fetchCurrenciesLatest();
 
+    fetchCurrenciesAPI();
     firstRender.current = false;
   }, []);
 
