@@ -7,6 +7,7 @@ import CurrencyDisplay from './Components/CurrencyDisplay';
 import Heading from './Components/Heading';
 import { ILatest } from './Types/Latest';
 import { ISymbols } from './Types/Symbols';
+import fetchFrom from './Utils/fetch';
 
 export interface ICurrenciesInfo {
   symbols: ISymbols;
@@ -23,32 +24,27 @@ const App: React.FC = () => {
     latest: { success: false },
   });
 
+  const fetchCurrenciesAPI = async () => {
+    setLoading(true);
+    try {
+      currenciesInfo.symbols = await fetchFrom('symbols');
+      currenciesInfo.latest = await fetchFrom('latest');
+      setCurrenciesInfo((oldCurrenciesInfoState) => {
+        return { ...oldCurrenciesInfoState, ...currenciesInfo };
+      });
+    } catch (e) {
+      setError(true);
+      // eslint-disable-next-line no-console
+      console.error(e);
+      // eslint-disable-next-line no-console
+      console.error("Can't connect to API");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!firstRender.current) return;
-
-    const fetchCurrencies = async (path: 'symbols' | 'latest') => {
-      const response = await fetch(`http://localhost:3004/${path}`);
-      const data = await response.json();
-      currenciesInfo[path] = data;
-      setCurrenciesInfo(currenciesInfo);
-    };
-
-    const fetchCurrenciesAPI = async () => {
-      setLoading(true);
-      try {
-        await fetchCurrencies('symbols');
-        await fetchCurrencies('latest');
-      } catch (e) {
-        setError(true);
-        // eslint-disable-next-line no-console
-        console.error(e);
-        // eslint-disable-next-line no-console
-        console.error("Can't connect to API");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCurrenciesAPI();
     firstRender.current = false;
   }, []);
