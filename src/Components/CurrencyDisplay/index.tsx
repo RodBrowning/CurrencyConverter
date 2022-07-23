@@ -12,6 +12,8 @@ type newValueAmount = string;
 interface Props {
   dolarAmount: string;
   setDolarAmountHandler: React.Dispatch<React.SetStateAction<string>>;
+  setBgCurrencyHandler: Function;
+  index: number;
   currenciesInfo: ICurrenciesInfo;
   inicialCurrencySymbol: string;
 }
@@ -19,6 +21,8 @@ interface Props {
 const CurrencyDisplay: React.FC<Props> = ({
   dolarAmount,
   setDolarAmountHandler,
+  setBgCurrencyHandler,
+  index,
   currenciesInfo,
   inicialCurrencySymbol,
 }) => {
@@ -50,6 +54,8 @@ const CurrencyDisplay: React.FC<Props> = ({
     const newValue = currenciesInfo.latest.rates![currencySymbol];
     setCurrencySymbol(currencySymbol);
     setCurrencyVal(newValue);
+    setTitle(currenciesInfo.symbols.symbols![currencySymbol]);
+    setBgCurrencyHandler(index, currencySymbol);
   };
 
   const convertAmountToDolar = (amount: OriginAmount, currencyVal: DolarValue): DolarAmount => {
@@ -82,6 +88,9 @@ const CurrencyDisplay: React.FC<Props> = ({
     const inicialCurrencyVal = currenciesInfo.latest.rates![inicialCurrencySymbol];
     setCurrencySymbol(inicialCurrencySymbol);
     setCurrencyVal(inicialCurrencyVal);
+    setCurrencySymbol(inicialCurrencySymbol);
+    setBgCurrencyHandler(index, inicialCurrencySymbol);
+    setTitle(currenciesInfo.symbols.symbols![inicialCurrencySymbol]);
     getSymbolsAndTitles();
   }, []);
 

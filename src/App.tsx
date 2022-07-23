@@ -2,9 +2,8 @@ import './App.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import { BsCurrencyExchange } from 'react-icons/bs';
 import CurrencyDisplay from './Components/CurrencyDisplay';
-import Heading from './Components/Heading';
+import Flag from './Components/Flags';
 import { ILatest } from './Types/Latest';
 import { ISymbols } from './Types/Symbols';
 import fetchFrom from './Utils/fetch';
@@ -19,10 +18,16 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [dolarAmount, setDolarAmount] = useState<string>('1.00');
+  const [bgCurrency, setBgCurrency] = useState<string[]>(['USD', 'BRL']);
   const [currenciesInfo, setCurrenciesInfo] = useState<ICurrenciesInfo>({
     symbols: { success: false },
     latest: { success: false },
   });
+
+  const bgCurrencyHandler = (index: number, currency: string): void => {
+    bgCurrency[index] = currency;
+    setBgCurrency({ ...bgCurrency });
+  };
 
   const fetchCurrenciesAPI = async () => {
     setLoading(true);
@@ -52,30 +57,43 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="main-container">
-        <Heading />
-        <div className="main-panel">
-          {loading ? 'Loading...' : ''}
-          {error ? 'Some error ocurred. Open browser console for more details.' : ''}
-          {currenciesInfo.symbols.success && currenciesInfo.latest.success ? (
-            <>
+        {loading ? (
+          <div className="loading">
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          ''
+        )}
+        {error ? 'Some error ocurred. Open browser console for more details.' : ''}
+        {currenciesInfo.symbols.success && currenciesInfo.latest.success ? (
+          <>
+            <div className="main-panel">
               <CurrencyDisplay
                 dolarAmount={dolarAmount}
                 setDolarAmountHandler={setDolarAmount}
+                setBgCurrencyHandler={bgCurrencyHandler}
+                index={0}
                 currenciesInfo={currenciesInfo}
                 inicialCurrencySymbol="USD"
               />
-              <BsCurrencyExchange className="exchange-icon" />
               <CurrencyDisplay
                 dolarAmount={dolarAmount}
                 setDolarAmountHandler={setDolarAmount}
+                setBgCurrencyHandler={bgCurrencyHandler}
+                index={1}
                 currenciesInfo={currenciesInfo}
-                inicialCurrencySymbol="EUR"
+                inicialCurrencySymbol="BRL"
               />
-            </>
-          ) : (
-            ''
-          )}
-        </div>
+            </div>
+            <div className="bg-effect" />
+            <div className="background-flags">
+              <Flag currency={bgCurrency[0]} />
+              <Flag currency={bgCurrency[1]} />
+            </div>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
