@@ -124,8 +124,8 @@ const CurrencyDisplay: React.FC<Props> = ({
   }, [dolarAmount, currencyVal]);
 
   return (
-    <div className="currency-panel">
-      <div className="selectedCurrency">
+    <div className="currency-display">
+      <div className="selected-currency">
         <h2>{currencyTitle}</h2>
       </div>
       <div className="select-wrapper">

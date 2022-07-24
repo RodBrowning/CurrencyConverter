@@ -37,7 +37,7 @@ const Flag: React.FC<Props> = ({ currency }) => {
   }, [flags, index]);
 
   return (
-    <div className="flag-container" ref={flagContainerRef}>
+    <div className="flags-container" ref={flagContainerRef}>
       {flags.map((flag) => {
         return (
           <div

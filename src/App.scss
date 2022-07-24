@@ -31,35 +31,6 @@
       border-radius: 16px;
       min-width: 59%;
       height: 255px;
-      .currency-panel:first-child {
-        padding-right: 10px;
-        .select-wrapper {
-          align-self: flex-end;
-          svg {
-            right: 15px;
-          }
-        }
-      }
-      .currency-panel:last-child {
-        padding-left: 10px;
-        .select-wrapper {
-          flex-direction: row-reverse;
-          &:before {
-            left: -10px;
-          }
-          select {
-            padding: 0 10px 0 40px;
-          }
-          svg {
-            left: 15px;
-          }
-        }
-        .selectedCurrency {
-          &:before {
-            left: -10px;
-          }
-        }
-      }
     }
     .bg-effect {
       position: absolute;

@@ -1,11 +1,12 @@
-.currency-panel {
+.currency-display {
+  --central-division: 10px;
   text-align: center;
   padding: 35px 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   flex: 1;
-  .selectedCurrency {
+  .selected-currency {
     white-space: nowrap;
     font-size: 0.7em;
     position: relative;
@@ -16,7 +17,7 @@
     &:before {
       content: '';
       position: absolute;
-      width: calc(100% + 10px);
+      width: calc(100% + var(--central-division));
       height: 2px;
       bottom: -5px;
       left: 0;
@@ -37,6 +38,8 @@
   }
   .input-wrapper {
     margin-bottom: 13px;
+    height: 45px;
+    cursor: pointer;
     input {
       width: 100%;
       padding: 0;
@@ -58,7 +61,6 @@
       font-size: 32px;
       p {
         margin: 0;
-        line-height: 36px;
       }
     }
   }
@@ -71,22 +73,50 @@
       cursor: pointer;
       font-size: 18px;
       appearance: none;
-      padding: 0 40px 0 10px;
+      padding: 0 30px 0 10px;
     }
     &:before {
       position: absolute;
       content: '';
-      width: calc(100% + 10px);
+      width: calc(100% + var(--central-division));
       height: 2px;
-      bottom: -4px;
+      bottom: -5px;
       left: 0;
       background-color: #4d4c49;
-      z-index: 5;
     }
     svg {
       position: absolute;
       pointer-events: none;
       margin: 10px;
+    }
+  }
+}
+.currency-display:first-child {
+  padding-right: var(--central-division);
+  .select-wrapper {
+    align-self: flex-end;
+    svg {
+      right: 5px;
+    }
+  }
+}
+.currency-display:last-child {
+  padding-left: var(--central-division);
+  .select-wrapper {
+    flex-direction: row-reverse;
+    &:before {
+      left: calc(var(--central-division) * -1);
+    }
+    select {
+      padding: 0 10px 0 30px;
+    }
+    svg {
+      left: 5px;
+    }
+  }
+  .selected-currency {
+    &:before {
+      left: calc(var(--central-division) * -1);
     }
   }
 }
