@@ -2,6 +2,8 @@ import './style.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 
+import PortugueseTitles from './portugueseTitles';
+// eslint-disable-next-line sort-imports
 import { ICurrenciesInfo } from '../../App';
 
 type DolarAmount = string;
@@ -50,6 +52,24 @@ const CurrencyDisplay: React.FC<Props> = ({
     currency: currencySymbol,
     useGrouping: true,
   });
+
+  const isPortuguese = () => {
+    return userLocale() === 'pt-BR';
+  };
+
+  const getPortugueseTitle = (title: string) => {
+    const joinedTitle = title.split(' ').join('-');
+    return PortugueseTitles[joinedTitle];
+  };
+
+  const setTitle = (title: string) => {
+    if (isPortuguese() && getPortugueseTitle(title)) {
+      const pTitle = getPortugueseTitle(title);
+      setCurrencyTitle(pTitle);
+    } else {
+      setCurrencyTitle(title);
+    }
+  };
 
   const onSelectChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const currencySymbol = e.target.value;
