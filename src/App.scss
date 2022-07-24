@@ -1,15 +1,84 @@
+* {
+  font-family: 'Goldman';
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.9);
+  body {
+    margin: 0;
+  }
+}
 .App {
-  height: 100vh;
   .main-container {
-    width: 600px;
+    .loading {
+      position: relative;
+      height: 100vh;
+      h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        margin: 0;
+      }
+    }
     .main-panel {
       display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      .exchange-icon {
-        height: 50px;
-        width: 50px;
+      justify-content: center;
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0px 10px 4px rgb(0 0 0 / 25%);
+      border-radius: 16px;
+      min-width: 59%;
+      height: 255px;
+      .currency-panel:first-child {
+        padding-right: 10px;
+        .select-wrapper {
+          align-self: flex-end;
+          svg {
+            right: 15px;
+          }
+        }
       }
+      .currency-panel:last-child {
+        padding-left: 10px;
+        .select-wrapper {
+          flex-direction: row-reverse;
+          &:before {
+            left: -10px;
+          }
+          select {
+            padding: 0 10px 0 40px;
+          }
+          svg {
+            left: 15px;
+          }
+        }
+        .selectedCurrency {
+          &:before {
+            left: -10px;
+          }
+        }
+      }
+    }
+    .bg-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      background-image: radial-gradient(circle at top, #ffffff40, #ffffff40, rgba(28, 28, 28, 0.6));
+      gap: 10px;
+      z-index: -1;
+    }
+    .background-flags {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      z-index: -2;
     }
   }
 }
