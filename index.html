@@ -9,5 +9,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const userLocale = () => {
+        return navigator && navigator.languages && navigator.languages.length
+          ? navigator.languages[0]
+          : navigator.language;
+      };
+      const isPortuguese = () => {
+        return userLocale() === 'pt-BR';
+      };
+      if (isPortuguese()) {
+        document.title = 'Conversor de moedas';
+      } else {
+        document.title = 'Currency converter';
+      }
+    </script>
   </body>
 </html>
