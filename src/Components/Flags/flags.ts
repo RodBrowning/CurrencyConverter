@@ -83,7 +83,7 @@ const flags: { [currencyAbbreviation: string]: string[] } = {
   ],
   FJD: ['fj.svg'],
   FKP: ['fk.svg'],
-  GBP: ['gb.svg', 'gg.svg', 'im.svg', 'je.svg'],
+  GBP: ['gb.svg', 'gg.svg', 'im.svg', 'je.svg', 'gb-eng.svg', 'gb-nir.svg', 'gb-sct.svg', 'gb-wls.svg'],
   GEL: ['ge.svg', 'gs.svg'],
   GGP: ['gg.svg'],
   GHS: ['gh.svg'],
