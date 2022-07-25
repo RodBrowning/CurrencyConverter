@@ -41,8 +41,6 @@ const App: React.FC = () => {
       setError(true);
       // eslint-disable-next-line no-console
       console.error(e);
-      // eslint-disable-next-line no-console
-      console.error("Can't connect to API");
     } finally {
       setLoading(false);
     }

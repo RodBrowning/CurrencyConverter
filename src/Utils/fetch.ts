@@ -4,17 +4,25 @@ import { ILatest } from '../Types/Latest';
 import { ISymbols } from '../Types/Symbols';
 
 const fetchCurrencies = async (pPath: 'symbols' | 'latest'): Promise<ISymbols | ILatest> => {
-  let URL = 'http://localhost:3004/';
-  let path = `${pPath}`;
-  const headers = new Headers();
-  if (import.meta.env.PROD) {
-    URL = import.meta.env.VITE_BASE_API_URL;
-    path = pPath === 'latest' ? `${pPath}?base=USD` : pPath;
-    headers.append('apikey', import.meta.env.VITE_API_KEY);
+  // eslint-disable-next-line no-useless-catch
+  try {
+    let URL = 'http://localhost:3004/';
+    let path = `${pPath}`;
+    const headers = new Headers();
+    if (import.meta.env.PROD) {
+      URL = import.meta.env.VITE_BASE_API_URL;
+      path = pPath === 'latest' ? `${pPath}?base=USD` : pPath;
+      headers.append('apikey', import.meta.env.VITE_API_KEY);
+    }
+    const response = await fetch(`${URL}${path}`, { headers });
+    if (!response.ok) {
+      throw new Error('Could not connect to API. Check URL and apikey.');
+    }
+    const data: ISymbols | ILatest = await response.json();
+    return data;
+  } catch (e) {
+    throw e;
   }
-  const response = await fetch(`${URL}${path}`, { headers });
-  const data: ISymbols | ILatest = await response.json();
-  return data;
 };
 
 export default async (path: 'symbols' | 'latest') => {
