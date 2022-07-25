@@ -2,10 +2,11 @@
   "name": "currency-converter",
   "private": true,
   "version": "0.0.0",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "npm run build && vite preview",
     "json-server": "cd api && json-server --watch db.json --port 3004"
   },
   "dependencies": {

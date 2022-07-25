@@ -44,7 +44,7 @@ const Flag: React.FC<Props> = ({ currency }) => {
             className="flag"
             key={flag}
             style={{
-              backgroundImage: `url(./src/assets/flags/${flag})`,
+              backgroundImage: `url(assets/flags/${flag})`,
             }}
           />
         );
