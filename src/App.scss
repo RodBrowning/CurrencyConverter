@@ -8,16 +8,15 @@
 }
 .App {
   .main-container {
-    .loading {
-      position: relative;
-      height: 100vh;
-      h1 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-        margin: 0;
-      }
+    height: 100vh;
+    .loading,
+    .error {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      margin: 0;
+      text-align: center;
     }
     .main-panel {
       display: flex;

@@ -64,7 +64,14 @@ const App: React.FC = () => {
         ) : (
           ''
         )}
-        {error ? 'Some error ocurred. Open browser console for more details.' : ''}
+        {error ? (
+          <div className="error">
+            <h1>Some error ocurred.</h1>
+            <h1>Open browser console for more details.</h1>
+          </div>
+        ) : (
+          ''
+        )}
         {currenciesInfo.symbols.success && currenciesInfo.latest.success ? (
           <>
             <div className="main-panel">
