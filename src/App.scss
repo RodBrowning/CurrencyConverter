@@ -30,6 +30,21 @@
       border-radius: 16px;
       min-width: 59%;
       height: 255px;
+      animation: show 0.7s ease-out 0.8s 1 normal forwards;
+      opacity: 0;
+
+      @keyframes show {
+        0% {
+          top: 37%;
+        }
+        10% {
+          opacity: 0;
+        }
+        100% {
+          top: 38%;
+          opacity: 1;
+        }
+      }
     }
     .bg-effect {
       position: absolute;
