@@ -1,9 +1,9 @@
 import './style.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
+// eslint-disable-next-line import/order
+import { getTranslatedTitle, hasTranslation, userLocale } from './translatedCurrencies';
 
-import PortugueseTitles from './portugueseTitles';
-// eslint-disable-next-line sort-imports
 import { ICurrenciesInfo } from '../../App';
 
 type DolarAmount = string;
@@ -43,31 +43,18 @@ const CurrencyDisplay: React.FC<Props> = ({
     setSymbolsAndTitles(symbolsAndTitles);
   };
 
-  const userLocale = () => {
-    return navigator && navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language;
-  };
-
   const currencyFormatter = Intl.NumberFormat(userLocale() || 'en-US', {
     style: 'currency',
     currency: currencySymbol,
     useGrouping: true,
   });
 
-  const isPortuguese = () => {
-    return userLocale() === 'pt-BR';
-  };
-
-  const getPortugueseTitle = (title: string) => {
-    const joinedTitle = title.split(' ').join('-');
-    return PortugueseTitles[joinedTitle];
-  };
-
-  const setTitle = (title: string) => {
-    if (isPortuguese() && getPortugueseTitle(title)) {
-      const pTitle = getPortugueseTitle(title);
+  const setTitle = (currencySymbol: string) => {
+    if (hasTranslation()) {
+      const pTitle = getTranslatedTitle(currencySymbol);
       setCurrencyTitle(pTitle);
     } else {
-      setCurrencyTitle(title);
+      setCurrencyTitle(currenciesInfo.symbols.symbols![currencySymbol]);
     }
   };
 
@@ -76,7 +63,7 @@ const CurrencyDisplay: React.FC<Props> = ({
     const newValue = currenciesInfo.latest.rates![currencySymbol];
     setCurrencySymbol(currencySymbol);
     setCurrencyVal(newValue);
-    setTitle(currenciesInfo.symbols.symbols![currencySymbol]);
+    setTitle(currencySymbol);
     setBgCurrencyHandler(index, currencySymbol);
   };
 
@@ -111,7 +98,7 @@ const CurrencyDisplay: React.FC<Props> = ({
     setCurrencyVal(inicialCurrencyVal);
     setCurrencySymbol(inicialCurrencySymbol);
     setBgCurrencyHandler(index, inicialCurrencySymbol);
-    setTitle(currenciesInfo.symbols.symbols![inicialCurrencySymbol]);
+    setTitle(inicialCurrencySymbol);
     getSymbolsAndTitles();
   }, []);
 
