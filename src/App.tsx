@@ -8,7 +8,7 @@ import Flag from './Components/Flags';
 import { ILatest } from './Types/Latest';
 import { ISymbols } from './Types/Symbols';
 import fetchFrom from './Utils/fetch';
-import getTranslatedTitle from './Utils/translatedTitles';
+import getPageTitle from './Utils/pageTitles';
 
 export interface ICurrenciesInfo {
   symbols: ISymbols;
@@ -49,7 +49,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    document.title = getTranslatedTitle();
+    document.title = getPageTitle();
   }, []);
 
   useEffect(() => {

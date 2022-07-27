@@ -1,4 +1,4 @@
-const TranslatedTitles: { [language: string]: string } = {
+const pageTitles: { [language: string]: string } = {
   pt: 'Conversor de moedas',
   es: 'Convertidor de moneda',
   en: 'Currency converter',
@@ -11,12 +11,12 @@ const userLocale = () => {
 };
 
 const hasTranslation = () => {
-  return TranslatedTitles[userLocale()] !== undefined;
+  return pageTitles[userLocale()] !== undefined;
 };
 
-const getTranslatedTitle = () => {
-  if (!hasTranslation()) return TranslatedTitles.en;
-  return TranslatedTitles[userLocale()];
+const getPageTitle = () => {
+  if (!hasTranslation()) return pageTitles.en;
+  return pageTitles[userLocale()];
 };
 
-export default getTranslatedTitle;
+export default getPageTitle;
