@@ -90,33 +90,33 @@
       margin: 10px;
     }
   }
-}
-.currency-display:first-child {
-  padding-right: var(--central-division);
-  .select-wrapper {
-    align-self: flex-end;
-    svg {
-      right: 5px;
+  &:first-child {
+    padding-right: var(--central-division);
+    .select-wrapper {
+      align-self: flex-end;
+      svg {
+        right: 5px;
+      }
     }
   }
-}
-.currency-display:last-child {
-  padding-left: var(--central-division);
-  .select-wrapper {
-    flex-direction: row-reverse;
-    &:before {
-      left: calc(var(--central-division) * -1);
+  &:last-child {
+    padding-left: var(--central-division);
+    .select-wrapper {
+      flex-direction: row-reverse;
+      &:before {
+        left: calc(var(--central-division) * -1);
+      }
+      select {
+        padding: 0 10px 0 30px;
+      }
+      svg {
+        left: 5px;
+      }
     }
-    select {
-      padding: 0 10px 0 30px;
-    }
-    svg {
-      left: 5px;
-    }
-  }
-  .selected-currency {
-    &:before {
-      left: calc(var(--central-division) * -1);
+    .selected-currency {
+      &:before {
+        left: calc(var(--central-division) * -1);
+      }
     }
   }
 }
