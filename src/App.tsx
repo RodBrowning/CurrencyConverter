@@ -1,4 +1,5 @@
 import './App.scss';
+import './App-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -7,6 +8,7 @@ import Flag from './Components/Flags';
 import { ILatest } from './Types/Latest';
 import { ISymbols } from './Types/Symbols';
 import fetchFrom from './Utils/fetch';
+import getTranslatedTitle from './Utils/translatedTitles';
 
 export interface ICurrenciesInfo {
   symbols: ISymbols;
@@ -45,6 +47,10 @@ const App: React.FC = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = getTranslatedTitle();
+  }, []);
 
   useEffect(() => {
     if (!firstRender.current) return;
