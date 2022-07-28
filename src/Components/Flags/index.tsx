@@ -15,6 +15,7 @@ const Flag: React.FC<Props> = ({ currency }) => {
 
   useEffect(() => {
     setFlags([...currenciesFlags[currency]]);
+    setIndex(0);
   }, [currency]);
 
   // eslint-disable-next-line consistent-return
@@ -30,7 +31,6 @@ const Flag: React.FC<Props> = ({ currency }) => {
         }
       }, 10000);
       return () => {
-        setIndex(0);
         clearTimeout(timeOut);
       };
     }
