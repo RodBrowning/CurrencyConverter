@@ -15,6 +15,17 @@
     &.show {
       opacity: 1;
       transform: scale(1.2);
+      animation: showAnimation 2s ease-in 0s 1 normal;
+    }
+    @keyframes showAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
     }
   }
 }
