@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import currenciesFlags from './flags';
 
@@ -15,11 +15,10 @@ const Flag: React.FC<Props> = ({ currency }) => {
 
   useEffect(() => {
     setFlags([...currenciesFlags[currency]]);
-    setIndex(0);
   }, [currency]);
 
   // eslint-disable-next-line consistent-return
-  useEffect(() => {
+  useLayoutEffect(() => {
     flagContainerRef!.current!.children[index].classList.add('show');
     if (flags.length > 1) {
       const timeOut = setTimeout(() => {
@@ -31,6 +30,7 @@ const Flag: React.FC<Props> = ({ currency }) => {
         }
       }, 10000);
       return () => {
+        setIndex(0);
         clearTimeout(timeOut);
       };
     }
