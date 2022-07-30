@@ -8,13 +8,13 @@
 
 > This is part of my React.js portfolio project.
 
-### 🏠 [Homepage](https://github.com/RodBrowning)
+### 🏠 [Github account](https://github.com/RodBrowning)
 
 &nbsp;&nbsp;https://github.com/RodBrowning
 
-### ✨ [Demo](https://rodbrowning.github.io/CurrencyConverter/)
+### ✨ [Production](https://rodbrowning.github.io/CurrencyConverter/)
 
-&nbsp;&nbsp;https://rodbrowning.github.io/CurrencyConverter/)
+&nbsp;&nbsp;https://rodbrowning.github.io/CurrencyConverter/
 
 ## Install
 
