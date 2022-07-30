@@ -1,0 +1,71 @@
+@media only screen and (max-width: 685px) {
+  .currency-display {
+    --central-division: 20px;
+    padding: 0 20px;
+    align-items: center;
+    > div {
+      margin: 10px 0;
+    }
+    .selected-currency {
+      white-space: initial;
+      width: 100%;
+      &:before {
+        content: '';
+        width: calc(100% + (var(--central-division) * 2));
+        left: calc(var(--central-division) * -1);
+      }
+    }
+    .select-wrapper {
+      width: 50vw;
+      &:before {
+        width: calc(100% + var(--central-division));
+      }
+      &:first-child {
+      }
+    }
+    &:first-child .select-wrapper {
+      svg {
+        left: 55px;
+      }
+    }
+
+    &:last-child {
+      padding-left: var(--central-division);
+      .select-wrapper {
+        align-self: flex-start;
+        &:before {
+          left: calc(var(--central-division) * -1);
+        }
+        select {
+          padding: 0 10px 0 30px;
+        }
+        svg {
+          left: unset;
+          right: 55px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .currency-display {
+    > div {
+      margin: 10px 0;
+    }
+    .select-wrapper select {
+      font-size: 34px;
+    }
+    .selected-currency {
+      h2 {
+        font-size: 48px;
+      }
+    }
+    .input-wrapper {
+      margin-bottom: 50px;
+      .display-value {
+        font-size: 48px;
+      }
+    }
+  }
+}

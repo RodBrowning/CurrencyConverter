@@ -1,4 +1,5 @@
 import './style.scss';
+import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 // eslint-disable-next-line import/order
