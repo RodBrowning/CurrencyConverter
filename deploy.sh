@@ -1,7 +1,12 @@
 set -e
 
-dir="/dist"
-[ -d $dir ] && rm -r $dir
+dir="dist"
+if [ -d $dir ]
+then
+cd $dir
+rm -rf .git
+cd -
+fi
 
 npm run build
 
