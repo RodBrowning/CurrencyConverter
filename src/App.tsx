@@ -1,7 +1,7 @@
 import './App.scss';
 import './App-mobile.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CurrencyDisplay from './Components/CurrencyDisplay';
 import Flag from './Components/Flags';
@@ -16,7 +16,6 @@ export interface ICurrenciesInfo {
 }
 
 const App: React.FC = () => {
-  const firstRender = useRef<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [dolarAmount, setDolarAmount] = useState<string>('1.00');
@@ -49,13 +48,8 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    document.title = getPageTitle();
-  }, []);
-
-  useEffect(() => {
-    if (!firstRender.current) return;
     fetchCurrenciesAPI();
-    firstRender.current = false;
+    document.title = getPageTitle();
   }, []);
 
   return (
