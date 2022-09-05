@@ -11,8 +11,8 @@ import fetchFrom from './Utils/fetch';
 import getPageTitle from './Utils/pageTitles';
 
 export interface ICurrenciesInfo {
-  symbols: ISymbols;
-  latest: ILatest;
+  symbols: Partial<ISymbols>;
+  latest: Partial<ILatest>;
 }
 
 const App: React.FC = () => {

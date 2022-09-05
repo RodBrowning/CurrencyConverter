@@ -25,7 +25,9 @@ const Flag: React.FC<Props> = ({ currency }) => {
       const timeOut = setTimeout(() => {
         flagContainerRef!.current!.children[index].classList.remove('show');
         if (index < flags.length - 1) {
-          setIndex(index + 1);
+          setIndex((oldIndex) => {
+            return oldIndex + 1;
+          });
         } else {
           setIndex(0);
         }
