@@ -36,13 +36,7 @@ const CurrencyDisplay: React.FC<Props> = ({
   const [currencyTitle, setCurrencyTitle] = useState<string>();
   const [currencySymbol, setCurrencySymbol] = useState<string>('USD');
   const [currencyVal, setCurrencyVal] = useState<number>(1);
-  const [symbolsAndTitles, setSymbolsAndTitles] = useState<[string, string][]>([]);
-
-  const getSymbolsAndTitles = () => {
-    const currenciesVal = currenciesInfo.symbols.symbols!;
-    const symbolsAndTitles: [string, string][] = Object.entries(currenciesVal);
-    setSymbolsAndTitles(symbolsAndTitles);
-  };
+  const symbolsAndTitles: [string, string][] = Object.entries(currenciesInfo.symbols.symbols!);
 
   const currencyFormatter = Intl.NumberFormat(userLocale() || 'en-US', {
     style: 'currency',
@@ -100,7 +94,6 @@ const CurrencyDisplay: React.FC<Props> = ({
     setCurrencySymbol(inicialCurrencySymbol);
     setBgCurrencyHandler(index, inicialCurrencySymbol);
     setTitle(inicialCurrencySymbol);
-    getSymbolsAndTitles();
   }, []);
 
   useEffect(() => {
