@@ -18,7 +18,7 @@ interface Props {
   setBgCurrencyHandler: Function;
   index: number;
   currenciesInfo: ICurrenciesInfo;
-  inicialCurrencySymbol: string;
+  currentCurrencySymbol: string;
 }
 
 const CurrencyDisplay: React.FC<Props> = ({
@@ -27,16 +27,16 @@ const CurrencyDisplay: React.FC<Props> = ({
   setBgCurrencyHandler,
   index,
   currenciesInfo,
-  inicialCurrencySymbol,
+  currentCurrencySymbol,
 }) => {
   const inputText = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [value, setValue] = useState<string>('0.00');
   const [displayValue, setDisplayValue] = useState<string>('');
   const [currencyTitle, setCurrencyTitle] = useState<string>();
-  const [currencySymbol, setCurrencySymbol] = useState<string>('USD');
   const [currencyVal, setCurrencyVal] = useState<number>(1);
   const symbolsAndTitles: [string, string][] = Object.entries(currenciesInfo.symbols.symbols!);
+  let currencySymbol = currentCurrencySymbol;
 
   const currencyFormatter = Intl.NumberFormat(userLocale() || 'en-US', {
     style: 'currency',
@@ -54,12 +54,11 @@ const CurrencyDisplay: React.FC<Props> = ({
   };
 
   const onSelectChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const currencySymbol = e.target.value;
-    const newValue = currenciesInfo.latest.rates![currencySymbol];
-    setCurrencySymbol(currencySymbol);
-    setCurrencyVal(newValue);
-    setTitle(currencySymbol);
+    currencySymbol = e.target.value;
     setBgCurrencyHandler(index, currencySymbol);
+    setTitle(currencySymbol);
+    const newValue = currenciesInfo.latest.rates![currencySymbol];
+    setCurrencyVal(newValue);
   };
 
   const convertAmountToDolar = (amount: OriginAmount, currencyVal: DolarValue): DolarAmount => {
@@ -89,11 +88,10 @@ const CurrencyDisplay: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    const inicialCurrencyVal = currenciesInfo.latest.rates![inicialCurrencySymbol];
+    setBgCurrencyHandler(index, currentCurrencySymbol);
+    setTitle(currentCurrencySymbol);
+    const inicialCurrencyVal = currenciesInfo.latest.rates![currentCurrencySymbol];
     setCurrencyVal(inicialCurrencyVal);
-    setCurrencySymbol(inicialCurrencySymbol);
-    setBgCurrencyHandler(index, inicialCurrencySymbol);
-    setTitle(inicialCurrencySymbol);
   }, []);
 
   useEffect(() => {
@@ -111,7 +109,7 @@ const CurrencyDisplay: React.FC<Props> = ({
       </div>
       <div className="select-wrapper">
         <select
-          value={currencySymbol}
+          defaultValue={currencySymbol}
           onChange={(e) => {
             onSelectChangeHandler(e);
           }}

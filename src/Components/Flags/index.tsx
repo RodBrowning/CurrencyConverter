@@ -5,18 +5,18 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import currenciesFlags from './flags';
 
 interface Props {
-  currency: string;
+  currencySymbol: string;
 }
 
-const Flag: React.FC<Props> = ({ currency }) => {
+const Flag: React.FC<Props> = ({ currencySymbol }) => {
   const flagContainerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState<number>(0);
-  const [flags, setFlags] = useState<string[]>(currenciesFlags[currency]);
+  const [flags, setFlags] = useState<string[]>(currenciesFlags[currencySymbol]);
 
   useEffect(() => {
-    setFlags([...currenciesFlags[currency]]);
+    setFlags([...currenciesFlags[currencySymbol]]);
     setIndex(0);
-  }, [currency]);
+  }, [currencySymbol]);
 
   // eslint-disable-next-line consistent-return
   useLayoutEffect(() => {

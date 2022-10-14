@@ -19,15 +19,15 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [dolarAmount, setDolarAmount] = useState<string>('1.00');
-  const [bgCurrency, setBgCurrency] = useState<string[]>(['USD', 'BRL']);
+  const [currentCurrencySymbol, setBgCurrency] = useState<string[]>(['USD', 'BRL']);
   const [currenciesInfo, setCurrenciesInfo] = useState<ICurrenciesInfo>({
     symbols: { success: false },
     latest: { success: false },
   });
 
   const bgCurrencyHandler = (index: number, currency: string): void => {
-    bgCurrency[index] = currency;
-    setBgCurrency({ ...bgCurrency });
+    currentCurrencySymbol[index] = currency;
+    setBgCurrency({ ...currentCurrencySymbol });
   };
 
   const fetchCurrenciesAPI = async () => {
@@ -79,7 +79,7 @@ const App: React.FC = () => {
                 setBgCurrencyHandler={bgCurrencyHandler}
                 index={0}
                 currenciesInfo={currenciesInfo}
-                inicialCurrencySymbol="USD"
+                currentCurrencySymbol={currentCurrencySymbol[0]}
               />
               <CurrencyDisplay
                 dolarAmount={dolarAmount}
@@ -87,13 +87,13 @@ const App: React.FC = () => {
                 setBgCurrencyHandler={bgCurrencyHandler}
                 index={1}
                 currenciesInfo={currenciesInfo}
-                inicialCurrencySymbol="BRL"
+                currentCurrencySymbol={currentCurrencySymbol[1]}
               />
             </div>
             <div className="bg-effect" />
             <div className="background-flags">
-              <Flag currency={bgCurrency[0]} />
-              <Flag currency={bgCurrency[1]} />
+              <Flag currencySymbol={currentCurrencySymbol[0]} />
+              <Flag currencySymbol={currentCurrencySymbol[1]} />
             </div>
           </>
         ) : (
