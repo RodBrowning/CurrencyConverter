@@ -1,3 +1,4 @@
+import './fonts/Goldman/stylesheet.scss'
 import './App.scss';
 import './App-mobile.scss';
 
