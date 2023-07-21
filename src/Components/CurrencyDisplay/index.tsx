@@ -2,7 +2,6 @@ import './style.scss';
 import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
-// eslint-disable-next-line import/order
 import { getTranslatedTitle, hasTranslation, userLocale } from './translatedCurrencies';
 
 import { ICurrenciesInfo } from '../../App';
@@ -15,7 +14,7 @@ type newValueAmount = string;
 interface Props {
   dolarAmount: string;
   setDolarAmountHandler: React.Dispatch<React.SetStateAction<string>>;
-  setBgCurrencyHandler: Function;
+  setCurrencyBgHandler: Function;
   index: number;
   currenciesInfo: ICurrenciesInfo;
   currentCurrencySymbol: string;
@@ -24,7 +23,7 @@ interface Props {
 const CurrencyDisplay: React.FC<Props> = ({
   dolarAmount,
   setDolarAmountHandler,
-  setBgCurrencyHandler,
+  setCurrencyBgHandler,
   index,
   currenciesInfo,
   currentCurrencySymbol,
@@ -55,7 +54,7 @@ const CurrencyDisplay: React.FC<Props> = ({
 
   const onSelectChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     currencySymbol = e.target.value;
-    setBgCurrencyHandler(index, currencySymbol);
+    setCurrencyBgHandler(index, currencySymbol);
     setTitle(currencySymbol);
     const newValue = currenciesInfo.latest.rates![currencySymbol];
     setCurrencyVal(newValue);
@@ -88,7 +87,7 @@ const CurrencyDisplay: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    setBgCurrencyHandler(index, currentCurrencySymbol);
+    setCurrencyBgHandler(index, currentCurrencySymbol);
     setTitle(currentCurrencySymbol);
     const inicialCurrencyVal = currenciesInfo.latest.rates![currentCurrencySymbol];
     setCurrencyVal(inicialCurrencyVal);

@@ -1,4 +1,4 @@
-import './fonts/Goldman/stylesheet.scss'
+import './fonts/Goldman/stylesheet.scss';
 import './App.scss';
 import './App-mobile.scss';
 
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [dolarAmount, setDolarAmount] = useState<string>('1.00');
-  const [currentCurrencySymbol, setBgCurrency] = useState<string[]>(['USD', 'BRL']);
+  const [currentCurrencySymbol, setCurrencyBg] = useState<string[]>(['USD', 'BRL']);
   const [currenciesInfo, setCurrenciesInfo] = useState<ICurrenciesInfo>({
     symbols: { success: false },
     latest: { success: false },
@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
   const bgCurrencyHandler = (index: number, currency: string): void => {
     currentCurrencySymbol[index] = currency;
-    setBgCurrency({ ...currentCurrencySymbol });
+    setCurrencyBg({ ...currentCurrencySymbol });
   };
 
   const fetchCurrenciesAPI = async () => {
@@ -77,7 +77,7 @@ const App: React.FC = () => {
               <CurrencyDisplay
                 dolarAmount={dolarAmount}
                 setDolarAmountHandler={setDolarAmount}
-                setBgCurrencyHandler={bgCurrencyHandler}
+                setCurrencyBgHandler={bgCurrencyHandler}
                 index={0}
                 currenciesInfo={currenciesInfo}
                 currentCurrencySymbol={currentCurrencySymbol[0]}
@@ -85,7 +85,7 @@ const App: React.FC = () => {
               <CurrencyDisplay
                 dolarAmount={dolarAmount}
                 setDolarAmountHandler={setDolarAmount}
-                setBgCurrencyHandler={bgCurrencyHandler}
+                setCurrencyBgHandler={bgCurrencyHandler}
                 index={1}
                 currenciesInfo={currenciesInfo}
                 currentCurrencySymbol={currentCurrencySymbol[1]}
